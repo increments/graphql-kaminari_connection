@@ -1,4 +1,4 @@
-require "graphql/kaminari_connection/version"
+require 'graphql/kaminari_connection/version'
 
 module Graphql
   module KaminariConnection
