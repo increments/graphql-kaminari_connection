@@ -113,6 +113,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord (~> 5.0)
   bundler (~> 1.16)
   codeclimate-test-reporter (~> 1.0)
   graphql-kaminari_connection!
