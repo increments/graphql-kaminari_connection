@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'graphql'
 require 'kaminari'
 
@@ -97,7 +99,7 @@ RSpec.describe GraphQL::KaminariConnection do
               'limitValue' => 25,
               'nextPage' => 2,
               'prevPage' => nil,
-              'totalPages' => 4,
+              'totalPages' => 4
             },
             'items' => 1.upto(25).map { |value| Hash['value' => value] }
           }
@@ -115,7 +117,7 @@ RSpec.describe GraphQL::KaminariConnection do
               'limitValue' => 25,
               'nextPage' => 3,
               'prevPage' => 1,
-              'totalPages' => 4,
+              'totalPages' => 4
             },
             'items' => 26.upto(50).map { |value| Hash['value' => value] }
           }
@@ -133,7 +135,7 @@ RSpec.describe GraphQL::KaminariConnection do
               'limitValue' => 20,
               'nextPage' => 2,
               'prevPage' => nil,
-              'totalPages' => 5,
+              'totalPages' => 5
             },
             'items' => 1.upto(20).map { |value| Hash['value' => value] }
           }
@@ -151,7 +153,7 @@ RSpec.describe GraphQL::KaminariConnection do
               'limitValue' => 10,
               'nextPage' => 4,
               'prevPage' => 2,
-              'totalPages' => 10,
+              'totalPages' => 10
             },
             'items' => 21.upto(30).map { |value| Hash['value' => value] }
           }
