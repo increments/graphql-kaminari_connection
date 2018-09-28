@@ -8,18 +8,6 @@ RSpec.describe GraphQL::KaminariConnection do
     expect(GraphQL::KaminariConnection::VERSION).not_to be nil
   end
 
-  let(:foo_type) do
-    Class.new(GraphQL::Schema::Object) do
-      include GraphQL::KaminariConnection
-      graphql_name 'Foo'
-      field :value, 'Int', null: false
-
-      def value
-        object
-      end
-    end
-  end
-
   let(:schema) do
     query = query_type
     Class.new(GraphQL::Schema) do
@@ -29,11 +17,19 @@ RSpec.describe GraphQL::KaminariConnection do
 
   context 'with Kaminari::PaginatableArray' do
     let(:query_type) do
-      foo = foo_type
+      foo_type = Class.new(GraphQL::Schema::Object) do
+        include GraphQL::KaminariConnection
+        graphql_name 'Foo'
+        field :value, 'Int', null: false
+
+        def value
+          object
+        end
+      end
 
       Class.new(GraphQL::Schema::Object) do
         graphql_name 'Query'
-        field :foos, foo.kaminari_connection
+        field :foos, foo_type.kaminari_connection
 
         def foos(page: nil, per: nil)
           Kaminari.paginate_array(1.upto(100).to_a).page(page).per(per)
@@ -171,11 +167,19 @@ RSpec.describe GraphQL::KaminariConnection do
 
   context 'with additional arguments' do
     let(:query_type) do
-      foo = foo_type
+      foo_type = Class.new(GraphQL::Schema::Object) do
+        include GraphQL::KaminariConnection
+        graphql_name 'Foo'
+        field :value, 'Int', null: false
+
+        def value
+          object
+        end
+      end
 
       Class.new(GraphQL::Schema::Object) do
         graphql_name 'Query'
-        field(:foos, foo.kaminari_connection) do
+        field(:foos, foo_type.kaminari_connection) do
           argument :max, 'Int', required: true
         end
 
@@ -208,6 +212,83 @@ RSpec.describe GraphQL::KaminariConnection do
         'data' => {
           'foos' => {
             'items' => 11.upto(15).map { |value| Hash['value' => value] }
+          }
+        }
+      )
+    end
+  end
+
+  context 'with .without_count' do
+    let(:query_type) do
+      post_type = Class.new(GraphQL::Schema::Object) do
+        include GraphQL::KaminariConnection
+        graphql_name 'Post'
+        field :title, 'String', null: false
+      end
+
+      Class.new(GraphQL::Schema::Object) do
+        graphql_name 'Query'
+        field :posts, post_type.kaminari_connection(without_count: true)
+
+        def posts(page: nil, per: nil)
+          Post.all.page(page).per(per).without_count
+        end
+      end
+    end
+
+    it 'defines PostPageWithoutTotalPages type' do
+      expect(schema.to_definition).to include <<~GRAPHQL.strip
+        type PostPageWithoutTotalPages {
+          # A list of items
+          items: [Post!]!
+          pageData: PageDataWithoutTotalPages!
+        }
+      GRAPHQL
+    end
+
+    it 'defines PageDataWithoutTotalPages type' do
+      expect(schema.to_definition).to include <<~GRAPHQL.strip
+        type PageDataWithoutTotalPages {
+          currentPage: Int!
+          isFirstPage: Boolean!
+          isLastPage: Boolean!
+          isOutOfRange: Boolean!
+          limitValue: Int!
+          nextPage: Int
+          prevPage: Int
+        }
+      GRAPHQL
+    end
+
+    it 'works' do
+      Post.create([
+                    { title: 'This Is A Pen' },
+                    { title: 'GraphQL Is Awesome' }
+                  ])
+
+      query = <<~GRAPHQL
+        {
+          posts {
+            pageData {
+              currentPage
+            }
+            items {
+              title
+            }
+          }
+        }
+      GRAPHQL
+
+      expect(schema.execute(query).to_h).to match(
+        'data' => {
+          'posts' => {
+            'pageData' => {
+              'currentPage' => 1
+            },
+            'items' => match_array([
+                                     { 'title' => 'This Is A Pen' },
+                                     { 'title' => 'GraphQL Is Awesome' }
+                                   ])
           }
         }
       )
