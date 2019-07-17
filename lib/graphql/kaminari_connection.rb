@@ -54,6 +54,7 @@ module GraphQL
           field :next_page, 'Int', null: true
           field :prev_page, 'Int', null: true
           field :total_pages, 'Int', null: false unless without_count
+          field :total_count, 'Int', null: false unless without_count
         end
       end
     end
