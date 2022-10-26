@@ -59,6 +59,7 @@ RSpec.describe GraphQL::KaminariConnection do
           limitValue: Int!
           nextPage: Int
           prevPage: Int
+          totalCount: Int!
           totalPages: Int!
         }
       GRAPHQL
