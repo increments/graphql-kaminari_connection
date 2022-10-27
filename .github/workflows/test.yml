@@ -1,0 +1,63 @@
+name: Run rspec, rubocop
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  rspec:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      matrix:
+        ruby: [2.5]
+    name: Ruby ${{ matrix.ruby }}
+    steps:
+      - name: Get branch names
+        id: branch-name
+        uses: tj-actions/branch-names@v4.9
+      - uses: actions/checkout@v3
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+          ruby-version: ${{ matrix.ruby }}
+      - run: bundle exec rspec
+
+  codeclimate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: tj-actions/branch-names@v4.9
+        id: branch-name
+      - uses: actions/checkout@v3
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.5.7
+          bundler-cache: true
+      - name: Test & publish code coverage
+        if: "${{ env.CC_TEST_REPORTER_ID != '' }}"
+        uses: paambaati/codeclimate-action@v2.7.5
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+          GIT_BRANCH: ${{ steps.branch-name.outputs.current_branch }}
+          GIT_COMMIT_SHA: ${{ github.sha }}
+        with:
+          coverageCommand: bundle exec rspec
+
+  rubocop:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+          ruby-version: 2.5.7
+
+      - name: Run rubocop
+        run: bundle exec rubocop
