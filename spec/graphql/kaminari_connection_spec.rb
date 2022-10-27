@@ -107,7 +107,7 @@ RSpec.describe GraphQL::KaminariConnection do
               'prevPage' => nil,
               'totalPages' => 4
             },
-            'items' => 1.upto(25).map { |value| Hash['value' => value] }
+            'items' => 1.upto(25).map { |value| { 'value' => value } }
           }
         }
       )
@@ -125,7 +125,7 @@ RSpec.describe GraphQL::KaminariConnection do
               'prevPage' => 1,
               'totalPages' => 4
             },
-            'items' => 26.upto(50).map { |value| Hash['value' => value] }
+            'items' => 26.upto(50).map { |value| { 'value' => value } }
           }
         }
       )
@@ -143,7 +143,7 @@ RSpec.describe GraphQL::KaminariConnection do
               'prevPage' => nil,
               'totalPages' => 5
             },
-            'items' => 1.upto(20).map { |value| Hash['value' => value] }
+            'items' => 1.upto(20).map { |value| { 'value' => value } }
           }
         }
       )
@@ -161,7 +161,7 @@ RSpec.describe GraphQL::KaminariConnection do
               'prevPage' => 2,
               'totalPages' => 10
             },
-            'items' => 21.upto(30).map { |value| Hash['value' => value] }
+            'items' => 21.upto(30).map { |value| { 'value' => value } }
           }
         }
       )
@@ -186,7 +186,7 @@ RSpec.describe GraphQL::KaminariConnection do
           argument :max, 'Int', required: true
         end
 
-        def foos(page: nil, per: nil, max:)
+        def foos(max:, page: nil, per: nil)
           Kaminari.paginate_array(1.upto(max).to_a).page(page).per(per)
         end
       end
@@ -214,7 +214,7 @@ RSpec.describe GraphQL::KaminariConnection do
       expect(schema.execute(query, variables: { page: 2, per: 10, max: 15 }).to_h).to eq(
         'data' => {
           'foos' => {
-            'items' => 11.upto(15).map { |value| Hash['value' => value] }
+            'items' => 11.upto(15).map { |value| { 'value' => value } }
           }
         }
       )

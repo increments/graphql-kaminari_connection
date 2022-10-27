@@ -40,7 +40,7 @@ module GraphQL
 
       # @param without_count [Boolean]
       # @return [Class]
-      def define_page_data_type(without_count:) # rubocop:disable Metrics/AbcSize
+      def define_page_data_type(without_count:)
         type_name = without_count ? "#{page_data_type_name}WithoutTotalPages" : page_data_type_name
         Class.new(base_page_data_class) do
           graphql_name type_name
@@ -87,8 +87,8 @@ module GraphQL
 
       def page_arguments
         [
-          [:page, type: 'Int', required: false],
-          [:per, type: 'Int', required: false]
+          [:page, { type: 'Int', required: false }],
+          [:per, { type: 'Int', required: false }]
         ]
       end
 
