@@ -40,7 +40,9 @@ RSpec.describe GraphQL::KaminariConnection do
     it 'defines corresponding FooPage type' do
       expect(schema.to_definition).to include <<~GRAPHQL.strip
         type FooPage {
-          # A list of items
+          """
+          A list of items
+          """
           items: [Foo!]!
           pageData: PageData!
         }
@@ -57,6 +59,7 @@ RSpec.describe GraphQL::KaminariConnection do
           limitValue: Int!
           nextPage: Int
           prevPage: Int
+          totalCount: Int!
           totalPages: Int!
         }
       GRAPHQL
@@ -239,7 +242,9 @@ RSpec.describe GraphQL::KaminariConnection do
     it 'defines PostPageWithoutTotalPages type' do
       expect(schema.to_definition).to include <<~GRAPHQL.strip
         type PostPageWithoutTotalPages {
-          # A list of items
+          """
+          A list of items
+          """
           items: [Post!]!
           pageData: PageDataWithoutTotalPages!
         }

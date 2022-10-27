@@ -23,11 +23,11 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'graphql', '~> 1.8'
+  spec.add_dependency 'graphql', '~> 1.9'
   spec.add_dependency 'kaminari', '~> 1.1'
 
   spec.add_development_dependency 'activerecord', '~> 5.0'
-  spec.add_development_dependency 'bundler', '~> 1.16'
+  spec.add_development_dependency 'bundler', '~> 1.17'
   spec.add_development_dependency 'codeclimate-test-reporter', '~> 1.0'
   spec.add_development_dependency 'pry', '0.11.3'
   spec.add_development_dependency 'rake', '~> 10.0'
