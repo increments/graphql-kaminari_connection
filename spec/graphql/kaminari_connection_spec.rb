@@ -29,7 +29,7 @@ RSpec.describe GraphQL::KaminariConnection do
 
       Class.new(GraphQL::Schema::Object) do
         graphql_name 'Query'
-        field :foos, foo_type.kaminari_connection
+        field :foos, **foo_type.kaminari_connection
 
         def foos(page: nil, per: nil)
           Kaminari.paginate_array(1.upto(100).to_a).page(page).per(per)
@@ -182,7 +182,7 @@ RSpec.describe GraphQL::KaminariConnection do
 
       Class.new(GraphQL::Schema::Object) do
         graphql_name 'Query'
-        field(:foos, foo_type.kaminari_connection) do
+        field(:foos, **foo_type.kaminari_connection) do
           argument :max, 'Int', required: true
         end
 
@@ -231,7 +231,7 @@ RSpec.describe GraphQL::KaminariConnection do
 
       Class.new(GraphQL::Schema::Object) do
         graphql_name 'Query'
-        field :posts, post_type.kaminari_connection(without_count: true)
+        field :posts, **post_type.kaminari_connection(without_count: true)
 
         def posts(page: nil, per: nil)
           Post.all.page(page).per(per).without_count
