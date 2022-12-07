@@ -42,7 +42,7 @@ then set `.kaminari_connection` to field type and resolve it as a kaminari objec
 
 ```rb
 class Types::Query < GraphQL::Schema::Object
-  field :articles, ArticleType.kaminari_connection
+  field :articles, **ArticleType.kaminari_connection
 
   def articles(page: nil, per: nil)
     Article.all.page(page).per(per)
@@ -89,7 +89,7 @@ You can define additional field arguments in its block:
 
 ```rb
 class Types::Query < GraphQL::Schema::Object
-  field(:articles, ArticleType.kaminari_connection) do
+  field(:articles, **ArticleType.kaminari_connection) do
     argument :scope, Types::ArticleScope, required: true
   end
 
@@ -105,7 +105,7 @@ Give `{ without_count: true }` to `.kaminari_connection`:
 
 ```rb
 class Types::Query < GraphQL::Schema::Object
-  field :articles, ArticleType.kaminari_connection(without_count: true)
+  field :articles, **ArticleType.kaminari_connection(without_count: true)
 
   def articles(page: nil, per: nil)
     Article.all.page(page).per(per).without_count
