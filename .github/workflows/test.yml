@@ -17,6 +17,7 @@ jobs:
         ruby: [3.1.6, 3.2.6, 3.3.6]
         gemfile:
           - graphql_1.x
+          - graphql_2.x
     env:
       BUNDLE_GEMFILE: ${{ github.workspace }}/gemfiles/${{ matrix.gemfile }}.gemfile
     name: Ruby ${{ matrix.ruby }} - Gemfile ${{ matrix.gemfile }}
