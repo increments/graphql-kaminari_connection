@@ -15,6 +15,10 @@ jobs:
       fail-fast: false
       matrix:
         ruby: [2.7.6, 3.0.4, 3.1.2]
+        gemfile:
+          - graphql_1.x
+    env:
+      BUNDLE_GEMFILE: ${{ github.workspace }}/gemfiles/${{ matrix.gemfile }}.gemfile
     name: Ruby ${{ matrix.ruby }}
     steps:
       - name: Get branch names
