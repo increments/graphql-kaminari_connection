@@ -4,15 +4,15 @@ require 'graphql'
 require 'kaminari'
 
 RSpec.describe GraphQL::KaminariConnection do
-  it 'has a version number' do
-    expect(GraphQL::KaminariConnection::VERSION).not_to be nil
-  end
-
   let(:schema) do
     query = query_type
     Class.new(GraphQL::Schema) do
       query query
     end
+  end
+
+  it 'has a version number' do
+    expect(GraphQL::KaminariConnection::VERSION).not_to be_nil
   end
 
   context 'with Kaminari::PaginatableArray' do
@@ -290,10 +290,7 @@ RSpec.describe GraphQL::KaminariConnection do
             'pageData' => {
               'currentPage' => 1
             },
-            'items' => match_array([
-                                     { 'title' => 'This Is A Pen' },
-                                     { 'title' => 'GraphQL Is Awesome' }
-                                   ])
+            'items' => contain_exactly({ 'title' => 'This Is A Pen' }, { 'title' => 'GraphQL Is Awesome' })
           }
         }
       )
