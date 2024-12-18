@@ -1,3 +1,6 @@
+require:
+  - rubocop-rspec
+
 AllCops:
   TargetRubyVersion: 3.1
   NewCops: enable
@@ -13,6 +16,19 @@ Metrics/MethodLength:
 
 Layout/LineLength:
   Max: 120
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/ExampleWording:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/SpecFilePathFormat:
+  CustomTransform:
+    GraphQL: graphql
 
 Style/Documentation:
   Enabled: false
