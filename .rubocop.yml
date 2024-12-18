@@ -2,13 +2,16 @@ AllCops:
   TargetRubyVersion: 3.1
   NewCops: enable
 
+Gemspec/DevelopmentDependencies:
+  Enabled: false
+
 Metrics/BlockLength:
   Enabled: false
 
 Metrics/MethodLength:
   Enabled: false
 
-Metrics/LineLength:
+Layout/LineLength:
   Max: 120
 
 Style/Documentation:
