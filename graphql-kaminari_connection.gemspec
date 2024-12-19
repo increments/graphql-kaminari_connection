@@ -25,10 +25,11 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = '>= 3.1'
 
-  spec.add_dependency 'graphql', '~> 1.9'
+  spec.add_dependency 'graphql', '>= 1.9', '< 3.0.0.a'
   spec.add_dependency 'kaminari', '~> 1.1'
 
   spec.add_development_dependency 'activerecord', '~> 6.0'
+  spec.add_development_dependency 'appraisal', '~> 2.5'
   spec.add_development_dependency 'bundler', '~> 2.2'
   spec.add_development_dependency 'codeclimate-test-reporter', '~> 1.0'
   spec.add_development_dependency 'pry', '0.11.3'

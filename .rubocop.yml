@@ -1,9 +1,16 @@
+# Merge default configurations on Exclude option
+inherit_mode:
+  merge:
+    - Exclude
+
 require:
   - rubocop-rspec
 
 AllCops:
   TargetRubyVersion: 3.1
   NewCops: enable
+  Exclude:
+    - gemfiles/**/* # Ignores appraisal gemfiles
 
 Gemspec/DevelopmentDependencies:
   Enabled: false
