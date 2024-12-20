@@ -18,5 +18,8 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
-          ruby-version: 3.1.6
+          # Use ruby v3.2.6 to use recent rubygems (v3.4.8+).
+          # release-gem requires rubygems v3.4.8+, because release-gem uses `gem exec` command and rubygems v3.4.8+ supports it.
+          # https://github.com/rubygems/release-gem/blob/a25424ba2ba8b387abc8ef40807c2c85b96cbe32/rubygems-attestation-patch.rb#L40-L45
+          ruby-version: 3.2.6
       - uses: rubygems/release-gem@v1
