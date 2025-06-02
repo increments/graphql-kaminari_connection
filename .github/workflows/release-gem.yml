@@ -13,13 +13,13 @@ jobs:
       contents: write # IMPORTANT: this permission is required for `rake release` to push the release tag
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
+        uses: ruby/setup-ruby@c95ae3725f6ebdd095f2bd19caed7ebc14435ba5 # v1.243.0
         with:
           bundler-cache: true
           # Use ruby v3.2.6 to use recent rubygems (v3.4.8+).
           # release-gem requires rubygems v3.4.8+, because release-gem uses `gem exec` command and rubygems v3.4.8+ supports it.
           # https://github.com/rubygems/release-gem/blob/a25424ba2ba8b387abc8ef40807c2c85b96cbe32/rubygems-attestation-patch.rb#L40-L45
           ruby-version: 3.2.6
-      - uses: rubygems/release-gem@v1
+      - uses: rubygems/release-gem@a25424ba2ba8b387abc8ef40807c2c85b96cbe32 # v1.1.1
