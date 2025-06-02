@@ -32,6 +32,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'appraisal', '~> 2.5'
   spec.add_development_dependency 'bundler', '~> 2.2'
   spec.add_development_dependency 'codeclimate-test-reporter', '~> 1.0'
+  spec.add_development_dependency 'concurrent-ruby', '< 1.3.5' # It is required by activerecord 6. see https://github.com/increments/graphql-kaminari_connection/issues/39.
   spec.add_development_dependency 'pry', '0.11.3'
   spec.add_development_dependency 'rake', '~> 10.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
