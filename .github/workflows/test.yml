@@ -32,26 +32,6 @@ jobs:
           ruby-version: ${{ matrix.ruby }}
       - run: bundle exec rspec
 
-  codeclimate:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: tj-actions/branch-names@6c999acf206f5561e19f46301bb310e9e70d8815 # v7.0.7
-        id: branch-name
-      - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
-      - uses: ruby/setup-ruby@c95ae3725f6ebdd095f2bd19caed7ebc14435ba5 # v1.243.0
-        with:
-          ruby-version: 3.1.6
-          bundler-cache: true
-      - name: Test & publish code coverage
-        if: "${{ env.CC_TEST_REPORTER_ID != '' }}"
-        uses: paambaati/codeclimate-action@7bcf9e73c0ee77d178e72c0ec69f1a99c1afc1f3 # v2.7.5
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-          GIT_BRANCH: ${{ steps.branch-name.outputs.current_branch }}
-          GIT_COMMIT_SHA: ${{ github.sha }}
-        with:
-          coverageCommand: bundle exec rspec
-
   rubocop:
     runs-on: ubuntu-latest
     timeout-minutes: 10

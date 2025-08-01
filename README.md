@@ -2,8 +2,6 @@
 
 [![Gem](https://img.shields.io/gem/v/graphql-kaminari_connection.svg)](https://rubygems.org/gems/graphql-kaminari_connection)
 [![Build Status](https://travis-ci.org/increments/graphql-kaminari_connection.svg?branch=master)](https://travis-ci.org/increments/graphql-kaminari_connection)
-[![Code Climate](https://codeclimate.com/github/increments/graphql-kaminari_connection/badges/gpa.svg)](https://codeclimate.com/github/increments/graphql-kaminari_connection)
-[![Test Coverage](https://codeclimate.com/github/increments/graphql-kaminari_connection/badges/coverage.svg)](https://codeclimate.com/github/increments/graphql-kaminari_connection/coverage)
 [![license](https://img.shields.io/github/license/increments/graphql-kaminari_connection.svg)](https://github.com/increments/graphql-kaminari_connection/blob/master/LICENSE)
 
 
