@@ -3,6 +3,8 @@
 [![Gem](https://img.shields.io/gem/v/graphql-kaminari_connection.svg)](https://rubygems.org/gems/graphql-kaminari_connection)
 [![Build Status](https://travis-ci.org/increments/graphql-kaminari_connection.svg?branch=master)](https://travis-ci.org/increments/graphql-kaminari_connection)
 [![license](https://img.shields.io/github/license/increments/graphql-kaminari_connection.svg)](https://github.com/increments/graphql-kaminari_connection/blob/master/LICENSE)
+[![Maintainability](https://qlty.sh/gh/increments/projects/graphql-kaminari_connection/maintainability.svg)](https://qlty.sh/gh/increments/projects/graphql-kaminari_connection)
+[![Code Coverage](https://qlty.sh/gh/increments/projects/graphql-kaminari_connection/coverage.svg)](https://qlty.sh/gh/increments/projects/graphql-kaminari_connection)
 
 
 Kaminari based GraphQL pagination
