@@ -28,10 +28,9 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'graphql', '>= 1.9', '< 3.0.0.a'
   spec.add_dependency 'kaminari', '~> 1.1'
 
-  spec.add_development_dependency 'activerecord', '~> 6.0'
+  spec.add_development_dependency 'activerecord', '~> 7.2'
   spec.add_development_dependency 'appraisal', '~> 2.5'
   spec.add_development_dependency 'bundler', '~> 2.2'
-  spec.add_development_dependency 'concurrent-ruby', '< 1.3.5' # It is required by activerecord 6. see https://github.com/increments/graphql-kaminari_connection/issues/39.
   spec.add_development_dependency 'pry', '0.11.3'
   spec.add_development_dependency 'rake', '~> 10.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
@@ -39,6 +38,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rubocop-rspec', '~> 3.3.0'
   spec.add_development_dependency 'simplecov', '~> 0.13'
   spec.add_development_dependency 'simplecov_json_formatter', '~> 0.1.4'
-  spec.add_development_dependency 'sqlite3', '~> 1.3'
+  spec.add_development_dependency 'sqlite3', '~> 2.8'
   spec.metadata['rubygems_mfa_required'] = 'true'
 end
